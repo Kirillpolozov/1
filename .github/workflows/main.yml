@@ -4,4 +4,30 @@ on:
       push:
           branches:
               -"main"
-                  
+
+jobs:
+     build:
+           name: Build Docker image
+           runs-on: ubuntu-latest
+           steps:
+                -
+                  name: Checkout
+                  uses: actions/checkour@v3
+                -
+                  name: Kirillpolozov
+                  uses: docker/login-action@v2
+                  with:
+                    username: kirillpolozov@icloud.com
+                    password: Qazwsx6109
+                -
+                   name: Set up Docker Buildx
+                   uses: docker/setup-duildx-action@v2
+                -
+                  name: Build and push
+                  uses: docker/build-push-action@v4
+                  with:
+                     context: .
+                     file: ./Dockerfile
+                     push: true
+                     tags: $/clockbox:latest
+                        
